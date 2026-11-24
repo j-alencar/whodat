@@ -1,0 +1,42 @@
+---
+config:
+  flowchart:
+    subGraphTitleMargin:
+      top: 8
+      bottom: 24
+---
+flowchart TD
+  yt[YouTube Videos] --> fetch[Fetch audio and captions]
+
+  prominent[Enrollment: Prominent Videos] --> candidates[Diarize sampled Windows into Candidate Voices]
+  candidates --> cut{{Voice cut questions: same person?}}
+  cut --> voice[Group into Voices]
+  voice --> confirm{{Enrollment Question: who is this Voice?}}
+  confirm --> clips[Enrollment Clips]
+  clips --> voiceprints[Voiceprints]
+
+  subgraph identification [Identification]
+    windows[Windows of 20 min or less] --> diarizer[Diarizer: Turns per Cluster]
+    diarizer --> embedder[Embedder: one embedding per single-voice Turn]
+    embedder --> match[Match each Cluster against Voiceprints]
+    match --> band{Thresholds}
+    band -->|in between| review[review]
+    band -->|top score >= high| person[Person]
+    band -->|top score < low| unknown[unknown]
+  end
+
+  subgraph labeling [Labeling]
+    question{{Review Question: who is this?}} --> labels[Label Files]
+    labels --> calibrate[Calibrate with impostor passes]
+    labels --> evaluation[Evaluation Run: metrics and plots]
+  end
+
+  fetch --> prominent
+  fetch --> windows
+  voiceprints --> match
+  review --> question
+  calibrate --> band
+
+  person --> timeline[Timeline HTML]
+  unknown --> timeline
+  review --> timeline

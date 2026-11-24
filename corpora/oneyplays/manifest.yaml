@@ -1,0 +1,12 @@
+# Video id -> Role (enroll | calibrate | eval)
+videos:
+  "-VwAMsgAUvA": calibrate  # Worms Armageddon complete series
+  "FhrsZIcXLvw": eval       # Worms Reloaded complete series
+  "DZv_IFWdUeg": enroll     # FF7 1
+  "-d9j63PROww": enroll     # Oney creates a Nostalgia Critic
+  "SeJcCqb0EyY": enroll     # Best of Zach
+  "nLS9XzLH5SQ": enroll     # Best of Zach vol. 2
+  "hzZa-pNiuGw": enroll     # Best of Lyle
+  "Yf2Qco5_vVk": enroll     # Best of Lyle 2
+  "gclQyopwzPg": enroll     # Best of Tomar
+  "1fOZ4W-t5B8": enroll     # Best of Tomar 2

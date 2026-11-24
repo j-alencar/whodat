@@ -1,0 +1,44 @@
+persons:
+  chris:
+    name: Chris
+    color: '#2a78d6'
+    prominent:
+    - DZv_IFWdUeg
+    - -d9j63PROww
+    clips:
+    - -d9j63PROww 00:13:44.5-00:13:53.6
+    - -d9j63PROww 00:13:56.9-00:14:03.4
+    - -d9j63PROww 00:14:12.0-00:14:15.8
+    - -d9j63PROww 00:31:10.1-00:31:15.3
+    - -d9j63PROww 00:35:15.9-00:35:23.6
+    - -d9j63PROww 00:38:25.2-00:38:31.3
+    - -d9j63PROww 00:55:40.1-00:55:47.9
+    - -d9j63PROww 00:58:52.3-00:58:56.8
+    - -d9j63PROww 01:00:29.4-01:00:35.2
+    - DZv_IFWdUeg 00:14:04.6-00:14:12.2
+    - DZv_IFWdUeg 00:22:54.4-00:23:06.7
+    - DZv_IFWdUeg 00:56:16.9-00:56:21.8
+    - DZv_IFWdUeg 01:00:41.3-01:00:56.3
+    - DZv_IFWdUeg 01:30:48.3-01:31:02.8
+    - DZv_IFWdUeg 01:32:45.3-01:32:50.6
+  lyle:
+    name: Lyle
+    color: '#eb6834'
+    prominent:
+    - hzZa-pNiuGw
+    - Yf2Qco5_vVk
+    clips: []
+  tomar:
+    name: Tomar
+    color: '#1baf7a'
+    prominent:
+    - gclQyopwzPg
+    - 1fOZ4W-t5B8
+    clips: []
+  zach:
+    name: Zach
+    color: '#eda100'
+    prominent:
+    - SeJcCqb0EyY
+    - nLS9XzLH5SQ
+    clips: []

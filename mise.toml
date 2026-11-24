@@ -1,0 +1,50 @@
+[tools]
+uv = "0.11.14"
+ffmpeg = "9.1.0"
+node = "24.22.3"
+# Puppeteer's own install script, which fetches the browser, is blocked by npm.
+"npm:@mermaid-js/mermaid-cli" = { version = "12.2.0", postinstall = "$MISE_TOOL_INSTALL_PATH/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/.bin/puppeteer browsers install chrome-headless-shell" }
+"npm:sharp-cli" = "6.1.0"
+
+[env]
+# `whd`, once `mise run setup` creates the venv.
+_.path = "{{config_root}}/.venv/bin"
+WHODAT_CORPUS = "corpora/oneyplays"
+
+[tasks.lint]
+description = "Check lint and formatting."
+run = ["uv run ruff check src tests", "uv run ruff format --check src tests"]
+
+[tasks.fmt]
+description = "Fix lint and format the code."
+run = ["uv run ruff check --fix src tests", "uv run ruff format src tests"]
+
+[tasks."test:unit"]
+description = "Run pure-logic tests. Fast, no models or network."
+run = "uv run pytest tests/unit"
+
+[tasks."test:integration"]
+description = "Run tests that load models and touch files. Needs `mise run setup`."
+run = "uv run pytest tests/integration"
+
+[tasks."test:e2e"]
+description = "Type random key sequences into the questionnaires; check files against a model. Slow. WHODAT_E2E_EXAMPLES sets the count."
+run = "uv run pytest -n auto --maxprocesses=2 tests/e2e"
+
+[tasks.test]
+description = "Run unit, integration and e2e tests."
+depends = ["test:unit", "test:integration", "test:e2e"]
+
+[tasks.ci]
+description = "Lint and run unit tests."
+depends = ["lint", "test:unit"]
+
+[tasks."docs:diagram"]
+description = "Render docs/pipeline.mmd to docs/pipeline.jpg."
+sources = ["docs/pipeline.mmd"]
+outputs = ["docs/pipeline.jpg"]
+run = [
+  "mmdc -q -i docs/pipeline.mmd -o docs/pipeline.png -s 2 -b white",
+  "sharp -i docs/pipeline.png -o docs/pipeline.jpg",
+  "rm docs/pipeline.png",
+]

@@ -1,0 +1,44 @@
+[project]
+name = "whodat"
+version = "0.1.0"
+description = "Diarize YouTube audio and name speakers by voiceprint"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pyannote.audio>=4.0",
+    "speechbrain>=1.0",
+    "torch>=2.8",
+    "torchaudio>=2.8",
+    "numpy",
+    "soundfile",
+    "librosa",
+    "praat-parselmouth",
+    "matplotlib",
+    "pyyaml",
+    "click",
+    "yt-dlp[default]",
+    "deno",
+    "questionary>=2.1.1",
+    "scipy>=1.18.1",
+]
+
+[project.scripts]
+whodat = "whodat.cli:cli"
+whd = "whodat.cli:cli"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.170.17",
+    "pytest",
+    "pytest-xdist>=3.8.0",
+    "ruff",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]

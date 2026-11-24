@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>$title</title>
+<style>
+$style
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <h1>$title</h1>
+  <p class="sub">Who speaks when. Click a Turn to open YouTube there.
+    Hatched = review (model unsure).</p>
+  <div class="controls">
+    <label>Zoom <input id="zoom" type="range" min="1" max="200" value="1"></label>
+    <span id="zoom-value">1x</span>
+  </div>
+  <div class="chart">
+    <div class="names" id="names"></div>
+    <div class="scroller"><div class="canvas" id="canvas"></div></div>
+  </div>
+  <div class="tip" id="tip"></div>
+</div>
+<script id="data" type="application/json">$data</script>
+<script>
+$script
+</script>
+</body>
+</html>
