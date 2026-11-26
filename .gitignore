@@ -2,5 +2,6 @@ issues/
 .venv/
 __pycache__/
 .claude/
-runs/
+runs/*
+!runs/example/
 .hypothesis/

@@ -69,11 +69,14 @@ class Workspace:
         embedder: str = "wespeaker",
         strategy: str = "cluster",
         embedders=EMBEDDERS,
+        runs: Path = Path("runs"),
     ) -> None:
         self.corpus = Corpus(corpus)
         self.embedder_name = embedder
         self.strategy = strategy
         self.embedders = embedders
+        self.runs = runs
+        """Holds evaluation runs and timelines."""
 
     @cached_property
     def embedder(self):
@@ -653,12 +656,14 @@ class Workspace:
         self.corpus.save_thresholds(self.embedder_name, thresholds)
         return thresholds
 
-    def evaluate(self, out: Path) -> dict:
+    def evaluate(self, out: Path | None = None) -> dict:
         sheets, total, impostor = self._score(self.corpus.videos("eval"))
         if not sheets:
             raise ValueError("no labeled Scored Regions on eval Videos")
         stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        folder = out / f"{stamp}-{self.embedder_name}-{self.strategy}"
+        folder = (out or self.runs / "evaluations") / (
+            f"{stamp}-{self.embedder_name}-{self.strategy}"
+        )
         settings = {
             "corpus": self.corpus.name,
             "embedder": self.embedder_name,
@@ -679,7 +684,10 @@ class Workspace:
 
     # Timeline
 
-    def timeline(self, video: str, out: Path, title: str | None = None) -> Path:
+    def timeline(
+        self, video: str, out: Path | None = None, title: str | None = None
+    ) -> Path:
+        out = out or self.runs / "timelines" / f"{video}.html"
         length = media.duration(video)
         t = self.thresholds
         prints = hashlib.sha1()
