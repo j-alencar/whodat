@@ -61,7 +61,7 @@ whodat follows the [XDG Base Directory spec](https://specifications.freedesktop.
 |---|---|
 | `$XDG_CACHE_HOME/whodat`, default `~/.cache/whodat` | Audio, models, diarization, embeddings, voiceprints, predictions. Safe to delete; it all regenerates. |
 | `$XDG_STATE_HOME/whodat`, default `~/.local/state/whodat` | Pending review questions, enrollment proposals, answered Voices and answers files. |
-| `runs/` | Evaluation runs and timelines. Gitignored. |
+| `runs/`, or `-r`/`WHODAT_RUNS` | Evaluation runs and timelines. Gitignored, except `runs/example/`. |
 
 ## WSL
 

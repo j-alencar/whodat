@@ -162,10 +162,19 @@ pass_ws = click.make_pass_decorator(Workspace)
     show_default=True,
     help="Match Strategy.",
 )
+@click.option(
+    "-r",
+    "--runs",
+    envvar="WHODAT_RUNS",
+    default="runs",
+    show_default=True,
+    type=click.Path(file_okay=False, path_type=Path),
+    help="Folder for evaluation runs and timelines. Env: WHODAT_RUNS.",
+)
 @click.pass_context
-def cli(ctx, corpus: Path, embedder: str, strategy: str) -> None:
+def cli(ctx, corpus: Path, embedder: str, strategy: str, runs: Path) -> None:
     """Identifies who spoke when in YouTube videos."""
-    ctx.obj = Workspace(corpus, embedder, strategy)
+    ctx.obj = Workspace(corpus, embedder, strategy, runs=runs)
 
 
 @cli.command()
@@ -346,12 +355,11 @@ def calibrate(ws: Workspace, max_error: float) -> None:
 @click.option(
     "-o",
     "--out",
-    default="runs",
-    show_default=True,
     type=click.Path(file_okay=False, path_type=Path),
+    help="Parent folder of the run. Default: RUNS/evaluations",
 )
 @pass_ws
-def evaluate(ws: Workspace, out: Path) -> None:
+def evaluate(ws: Workspace, out: Path | None) -> None:
     """Evaluates the labeled `eval` videos and writes `metrics.json` and plots."""
     emit(ws.evaluate(out))
 
@@ -362,13 +370,12 @@ def evaluate(ws: Workspace, out: Path) -> None:
     "-o",
     "--out",
     type=click.Path(dir_okay=False, path_type=Path),
-    help="HTML file. Default: runs/timelines/VIDEO.html",
+    help="HTML file. Default: RUNS/timelines/VIDEO.html",
 )
 @click.option("-t", "--title", help="Page title. Default: VIDEO.")
 @pass_ws
 def timeline(ws: Workspace, video: str, out: Path | None, title: str | None) -> None:
     """Renders the timeline for `VIDEO` as interactive HTML."""
-    out = out or Path("runs") / "timelines" / f"{video}.html"
     emit({"timeline": str(ws.timeline(video, out, title))})
 
 

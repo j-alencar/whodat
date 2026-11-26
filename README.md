@@ -36,8 +36,11 @@ and a match in between waits for you to answer by ear.
 whodat gives you three outputs:
 
 - label files that grow as you confirm or correct its guesses
-- evaluation runs: metrics as JSON and plots as PNG, under `runs/`
+- evaluation runs: metrics as JSON and plots as PNG
 - an HTML timeline per video, with one colored row per person
+
+The outputs go to `runs/`.
+[`runs/example/`](runs/example/) holds them for the oneyplays corpus.
 
 ## Walkthrough
 
@@ -318,7 +321,7 @@ whd evaluate
 ```
 
 Each run writes `metrics.json`, `scores.png` and `confusion.png`
-to a new folder under `runs/`.
+to a new folder under `runs/evaluations/`.
 The metrics include accuracy on accepted speech,
 the share of speech left for review,
 and how often an unknown voice gets a name.

@@ -4,6 +4,7 @@ repos:
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=512']
+        exclude: ^runs/example/
       - id: trailing-whitespace
         exclude: __snapshots__/
       - id: debug-statements
